@@ -1,0 +1,39 @@
+<div class="content-container">
+<div class="jumbotron border" > 
+    <div class="container">
+      <h2>All User Details</h2>
+      <p>This table list-out all the user's in the database:</p>        
+      
+      <!-- <div class="input-group">
+        <div class="form-outline">
+          <input type="search" id="form1" class="form-control" />
+          <label class="form-label" for="form1">Search</label>
+        </div>
+        <button type="button" class="btn btn-primary">
+          <i class="fas fa-search"></i>
+        </button>
+      </div> -->
+      
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>password</th>
+          </tr>
+        </thead>
+        <tbody>
+            <h3 *ngIf='users.length==0'>{{ data_check }}</h3>
+
+            <tr *ngFor="let user of users">
+              <td> {{ user.name }} </td>
+              <td> {{ user.email }} </td>
+              <td> {{ user.password }} </td>
+            </tr>
+          
+
+        </tbody>
+      </table>
+    </div>
+</div>
+</div>
