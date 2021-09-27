@@ -24,6 +24,8 @@
         </thead>
         <tbody>
             <h3 *ngIf='users.length==0'>{{ data_check }}</h3>
+            <h3>{{ errorMsg }}</h3>
+            <!-- <h3> {{ dataError }} </h3> -->
 
             <tr *ngFor="let user of users">
               <td> {{ user.name }} </td>

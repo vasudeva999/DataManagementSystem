@@ -29,6 +29,8 @@
                 <h5 class="text-primary" > Delete a Record </h5>
             </div>
 
+            <h3>{{ errorMsg }}</h3>
+
             <form (ngSubmit)="deleteUser(email)">
                   <!-- Email input -->
                 <div class="form-outline mb-4">
@@ -37,8 +39,9 @@
                     <label class="form-label" >Email address</label>
                   </div>
         
-
+                  
                   <div class="text-center text-lg-start mt-4 pt-2">
+                    <button type="button" hidden data-toggle="modal" data-target="#alert" id="pop_up"></button>
                     <button type="submit" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#alert"
                       style="padding-left: 2.5rem; padding-right: 2.5rem;">Delete Details</button>
                   </div>

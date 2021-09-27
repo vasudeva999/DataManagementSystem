@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../user.service';
+import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-delete-user',
@@ -8,38 +9,72 @@ import { UserService } from '../../user.service';
 })
 export class DeleteUserComponent implements OnInit {
 
+  errorMsg = '';
+
   constructor(
-    private userService: UserService
+    public userService: UserService,
+    private router: Router
   ) { }
 
+  alert_msg = "Please wait! We are validating your data";
+  alert_title = "Loading!";
+
   ngOnInit(): void {
+    if (!this.userService.getIsLogin()){
+      this.alert_msg = "Please Login! To get the access.";
+      this.alert_title = "Error!";
+
+      document.getElementById("pop_up")?.click();      
+
+      setTimeout(()=>{
+        document.getElementById("alert_close")?.click();
+        this.router.navigate(["/"])
+      }, 1800);
+    }else{
+      this.alert_msg = "Please wait! We are validating your data";
+      this.alert_title = "Loading!";
+    }
   }
 
   email = ''
   password = ''
 
-  alert_msg = "";
-  alert_title = "";
+  
 
-  deleteUser(email: any){
-    if (this.userService.isExists(email)){
-      if (email != ''){
-        this.userService.deleteUser(email);
-        this.email = '';
+  isExists = false;
 
-        this.alert_msg = "User with email id "+ email +" has been removed from DataBase";
-        this.alert_title = "Success!";
+  deleteUser(email: string){
+    this.userService.isExists(email).subscribe(isExists=>{
+      this.isExists=isExists;})
 
-    }
-    }
-    else{
-      this.alert_msg = "User with email id "+ email +" Not Exists in DataBase";
-      this.alert_title = "Error!";
+      console.log(email);
       
-    }
-    setTimeout(() => {
-      document.getElementById("alert_close")?.click();
-    }, 5000);
+      console.log(this.isExists);
+      
+
+      if (this.isExists){
+        if (email != ''){
+          this.userService.deleteUser(email).subscribe(
+            error => this.errorMsg = error.message
+          );
+          this.email = '';
+
+          this.alert_msg = "User with email id "+ email +" has been removed from DataBase";
+          this.alert_title = "Success!";
+
+      }
+      }
+      else{
+        this.alert_msg = "User with email id "+ email +" Not Exists in DataBase";
+        this.alert_title = "Error!";
+        
+      }
+      setTimeout(() => {
+        document.getElementById("alert_close")?.click();
+      }, 5000);
+
+    
+    
   }
 
 }
