@@ -24,6 +24,8 @@ export class NavBarComponent implements OnInit {
   App_Name = "Data Management System";
 
   signOut(): void {
+    localStorage.clear()
+
     this.userService.setIsLogin(false);
     this.authService.signOut();
     this.router.navigate(["/"]);

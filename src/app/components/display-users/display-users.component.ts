@@ -21,7 +21,7 @@ export class DisplayUsersComponent implements OnInit, OnChanges {
     
     setTimeout(() => {
       this.data_check = "No Data Found :(";
-    }, 3000);
+    }, 5000);
 
     this.userService.getAllUsers().subscribe(
       users => {

@@ -26,7 +26,7 @@ export class AddUserComponent implements OnInit {
 
       setTimeout(()=>{
         document.getElementById("alert_close")?.click();
-        this.router.navigate(["/"])
+        this.router.navigate(["/login"])
       }, 1800);
     }else{
       this.alert_msg = "Please wait! We are validating your data";
@@ -72,10 +72,13 @@ export class AddUserComponent implements OnInit {
               name: this.name,
               email: this.email,
               password: this.password
-          }).subscribe(
-            ()=>{},
-            error => {this.errorMsg = error.message}
-          );
+          }).subscribe((res)=>{
+            console.log(res);
+            
+              if(res.token){
+                localStorage.setItem('token', res.token)
+              }
+          });
 
           this.alert_msg = "User with email id "+ this.email +" has been added to DataBase";
           this.alert_title = "Success!";

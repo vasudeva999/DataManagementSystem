@@ -16,7 +16,7 @@ const httpOptions={
 })
 export class UserService {
 
-  private isLogin = false;
+  private isLogin = !!localStorage.getItem('token');
 
   constructor(
     private http: HttpClient
@@ -49,13 +49,15 @@ export class UserService {
   }
 
   authenticate(user: User): Observable<any>{
-    console.log(user);
-    
     return this.http.post<any>(this.urlAuthenticate, user);
   }
 
-  setUser(user: User): Observable<User>{
-    return this.http.post<User>(this.urlSetUser, user);
+  loggedIn(){
+    return !!localStorage.getItem('token')
+  }
+
+  setUser(user: User): Observable<any>{
+    return this.http.post<any>(this.urlSetUser, user);
     // AllUsers.push(user);
   }
 

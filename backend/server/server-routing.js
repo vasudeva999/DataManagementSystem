@@ -2,6 +2,7 @@ const { response } = require('express');
 const express = require('express');
 const User = require("../models/user");
 require('../database/database')
+const jwt = require('jsonwebtoken')
 
 const router = express.Router();
 
@@ -25,13 +26,14 @@ router.post("/authenticate", async (req, res)=>{
         if (user){
             const isMatch = await user.comparePasswords(password);
             if (isMatch){ 
-                res.send({success: true, message: 'Password is Correct!', status: 'Correct Password'})
+                const token = jwt.sign({id: user._id}, 'key')
+                res.send({success: true, message: 'User Exists', status: 'Valid User', token: token})
             }else {
-                res.send({success: false, message: 'Invalid Password!\nRe-enter your password.', status: 'Incorrect Password'})
+                res.send({success: false, message: 'Invalid Password!\nRe-enter your password.', status: 'Incorrect Password', token: null})
             }
 
         }else{
-            res.send({success: false, message : 'User with email Id '+ email+' is not registered!', status: "Invalid User"})
+            res.send({success: false, message : 'User with email Id '+ email+' is not registered!', status: "Invalid User", token: null})
         }
 
     }catch(error){
@@ -44,15 +46,14 @@ router.post("/addUser", async (req, res)=>{
     const {name, email , password} = req.body;
 
     try{
-        await User.create({
+        const user = await User.create({
             name: name, 
             email: email,
             password: password
         });
-
-        res.send("User added successfully..");
+        res.send({message:"User added successfully..", token: user.getSignedToken()});
     }catch(error){
-        res.send({message: error.message});
+        res.send({message: error.message, token: null});
     }
 })
 

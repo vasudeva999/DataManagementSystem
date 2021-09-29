@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
           })
           
           this.userService.setIsLogin(true);
-          this.router.navigate(["/"]);
+          this.router.navigate(["/login"]);
         }
         
       });
@@ -75,7 +75,6 @@ export class LoginComponent implements OnInit {
 
 
   submit(){
-    console.log("srtd"+this.email);
     
     this.userService.authenticate({
       name: '',
@@ -84,6 +83,7 @@ export class LoginComponent implements OnInit {
     }).subscribe((res)=>{
         if (!res.success){
           this.alert_title = "Error!";
+          
           if (res.status == "Incorrect Password"){
             this.alert_msg = res.message;
           }else if (res.status == "Invalid USer"){
@@ -94,6 +94,8 @@ export class LoginComponent implements OnInit {
           
 
         }else {
+          localStorage.setItem('token', res.token)
+          
           this.alert_msg = "Logged-in, Please wait! ";
           this.alert_title = "Success!";
 

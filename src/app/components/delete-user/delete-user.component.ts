@@ -28,7 +28,7 @@ export class DeleteUserComponent implements OnInit {
 
       setTimeout(()=>{
         document.getElementById("alert_close")?.click();
-        this.router.navigate(["/"])
+        this.router.navigate(["/login"])
       }, 1800);
     }else{
       this.alert_msg = "Please wait! We are validating your data";
