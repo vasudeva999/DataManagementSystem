@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../classes/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError, Subject } from 'rxjs';
+import { Observable} from 'rxjs';
 
 const httpOptions={
   headers: new HttpHeaders({
@@ -29,12 +29,19 @@ export class UserService {
 
   
 
-  urlGetAllUsers: string = "http://localhost:"+ this.PORT + this.PATH +"/getAllUsers";
-  urlAuthenticate: string = "http://localhost:"+ this.PORT + this.PATH +"/authenticate";
-  urlSetUser: string = "http://localhost:"+ this.PORT + this.PATH +"/addUser";
-  urlDeleteUser: string = "http://localhost:"+ this.PORT + this.PATH +"/dropUser/";
-  urlIsExists: string = "http://localhost:"+ this.PORT + this.PATH +"/isUserExists/";
-  urlUpdateUser: string = "http://localhost:"+ this.PORT + this.PATH + "/updateUser/";
+  // urlGetAllUsers: string = "http://localhost:"+ this.PORT + this.PATH +"/getAllUsers";
+  // urlAuthenticate: string = "http://localhost:"+ this.PORT + this.PATH +"/authenticate";
+  // urlSetUser: string = "http://localhost:"+ this.PORT + this.PATH +"/addUser";
+  // urlDeleteUser: string = "http://localhost:"+ this.PORT + this.PATH +"/dropUser/";
+  // urlIsExists: string = "http://localhost:"+ this.PORT + this.PATH +"/isUserExists/";
+  // urlUpdateUser: string = "http://localhost:"+ this.PORT + this.PATH + "/updateUser/";
+
+  urlGetAllUsers: string = "http://ec2-3-144-134-218.us-east-2.compute.amazonaws.com:4000/data"+"/getAllUsers";
+  urlAuthenticate: string = "http://ec2-3-144-134-218.us-east-2.compute.amazonaws.com:4000/data"+"/authenticate";
+  urlSetUser: string = "http://ec2-3-144-134-218.us-east-2.compute.amazonaws.com:4000/data"+"/addUser";
+  urlDeleteUser: string = "http://ec2-3-144-134-218.us-east-2.compute.amazonaws.com:4000/data"+"/dropUser/";
+  urlIsExists: string = "http://ec2-3-144-134-218.us-east-2.compute.amazonaws.com:4000/data"+"/isUserExists/";
+  urlUpdateUser: string = "http://ec2-3-144-134-218.us-east-2.compute.amazonaws.com:4000/data"+"/updateUser/";
 
   getIsLogin(){
     return this.isLogin;
