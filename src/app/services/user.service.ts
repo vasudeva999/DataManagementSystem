@@ -36,12 +36,12 @@ export class UserService {
   // urlIsExists: string = "http://localhost:"+ this.PORT + this.PATH +"/isUserExists/";
   // urlUpdateUser: string = "http://localhost:"+ this.PORT + this.PATH + "/updateUser/";
 
-  urlGetAllUsers: string = "http://ec2-3-144-134-218.us-east-2.compute.amazonaws.com:4000/data"+"/getAllUsers";
-  urlAuthenticate: string = "http://ec2-3-144-134-218.us-east-2.compute.amazonaws.com:4000/data"+"/authenticate";
-  urlSetUser: string = "http://ec2-3-144-134-218.us-east-2.compute.amazonaws.com:4000/data"+"/addUser";
-  urlDeleteUser: string = "http://ec2-3-144-134-218.us-east-2.compute.amazonaws.com:4000/data"+"/dropUser/";
-  urlIsExists: string = "http://ec2-3-144-134-218.us-east-2.compute.amazonaws.com:4000/data"+"/isUserExists/";
-  urlUpdateUser: string = "http://ec2-3-144-134-218.us-east-2.compute.amazonaws.com:4000/data"+"/updateUser/";
+  urlGetAllUsers: string = "http://3.142.152.225:4000/data/"+"/getAllUsers";
+  urlAuthenticate: string = "http://3.142.152.225:4000/data/"+"/authenticate";
+  urlSetUser: string = "http://3.142.152.225:4000/data/"+"/addUser";
+  urlDeleteUser: string = "http://3.142.152.225:4000/data/"+"/dropUser/";
+  urlIsExists: string = "http://3.142.152.225:4000/data/"+"/isUserExists/";
+  urlUpdateUser: string = "http://3.142.152.225:4000/data/"+"/updateUser/";
 
   getIsLogin(){
     return this.isLogin;
